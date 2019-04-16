@@ -68,11 +68,23 @@ class ViewController: UIViewController {
             return
         }
         let apiManager:ApiManager = ApiManager()
-        let weatherData = apiManager.getWeatherData(location: location)
-        temperatureValueLabel.text = String(weatherData.currentTemperature) + "°C"
-        descriptionValueLabel.text = weatherData.description
         
-        toggleDisplay(isHidden: false)
+        DispatchQueue.global(qos: .userInitiated).async {
+            apiManager.getWeatherData(location: location, success: {(data) -> Void in
+                guard let weatherData = data else {
+                    print("Error getting weather data")
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    self.temperatureValueLabel.text = String(weatherData.currentTemperature) + "°C"
+                    self.descriptionValueLabel.text = weatherData.description
+                    
+                    self.toggleDisplay(isHidden: false)
+                }
+                
+            })
+        }
     }
     
     private func toggleDisplay(isHidden: Bool) {
