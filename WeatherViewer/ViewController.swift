@@ -20,6 +20,9 @@ class ViewController: UIViewController {
         view.addSubview(temperatureValueLabel)
         view.addSubview(descriptionValueLabel)
         view.addSubview(descriptionLabel)
+        
+        toggleDisplay(isHidden: true)
+        
         view.setNeedsUpdateConstraints()
     }
 
@@ -68,6 +71,15 @@ class ViewController: UIViewController {
         let weatherData = ApiManager.getWeatherData(location: location)
         temperatureValueLabel.text = String(weatherData.currentTemperature) + "°C"
         descriptionValueLabel.text = weatherData.description
+        
+        toggleDisplay(isHidden: false)
+    }
+    
+    private func toggleDisplay(isHidden: Bool) {
+        temperatureLabel.isHidden = isHidden
+        temperatureValueLabel.isHidden = isHidden
+        descriptionValueLabel.isHidden = isHidden
+        descriptionLabel.isHidden = isHidden
     }
     
     func createLabel(text: String) -> UILabel {
