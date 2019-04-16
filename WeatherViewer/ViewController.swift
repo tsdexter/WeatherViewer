@@ -54,9 +54,21 @@ class ViewController: UIViewController {
         view.setTitleColor(UIColor.black, for: .normal)
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.black.cgColor
+        view.addTarget(self, action: #selector(onSearchClicked), for: .touchDown)
         
         return view
     }()
+    
+    @objc func onSearchClicked() {
+        guard let location = searchField.text else {
+            print("Error getting text")
+            return
+        }
+        
+        let weatherData = ApiManager.getWeatherData(location: location)
+        temperatureValueLabel.text = String(weatherData.currentTemperature) + "°C"
+        descriptionValueLabel.text = weatherData.description
+    }
     
     func createLabel(text: String) -> UILabel {
         let view = UILabel()
