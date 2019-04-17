@@ -21,10 +21,18 @@ class ViewController: UIViewController {
         view.addSubview(searchField)
         
         // add views that hold weather data into data view
+        dataView.addSubview(currentLabel)
         dataView.addSubview(temperatureLabel)
         dataView.addSubview(temperatureValueLabel)
         dataView.addSubview(descriptionValueLabel)
         dataView.addSubview(descriptionLabel)
+        dataView.addSubview(forecastsLabel)
+        dataView.addSubview(forecastHighLabel)
+        dataView.addSubview(forecastHighValueLabel)
+        dataView.addSubview(forecastLowLabel)
+        dataView.addSubview(forecastLowValueLabel)
+        dataView.addSubview(forecastDescriptionLabel)
+        dataView.addSubview(forecastDescriptionValueLabel)
         
         toggleDisplay(isHidden: true)
         
@@ -151,6 +159,38 @@ class ViewController: UIViewController {
         return createLabel(text: "Sunny")
     }()
     
+    // assignment 4 UI
+    lazy var currentLabel: UILabel! = {
+        let label = createLabel(text: "Current")
+        label.font = label.font.withSize(30)
+        return label
+    }()
+    
+    lazy var forecastsLabel: UILabel! = {
+        let label = createLabel(text: "Tomorrow")
+        label.font = label.font.withSize(30)
+        return label
+    }()
+    
+    lazy var forecastHighLabel: UILabel! = {
+        createLabel(text: "High:")
+    }()
+    lazy var forecastLowLabel: UILabel! = {
+        createLabel(text: "Low:")
+    }()
+    lazy var forecastHighValueLabel: UILabel! = {
+        createLabel(text: "100°C")
+    }()
+    lazy var forecastLowValueLabel: UILabel! = {
+        createLabel(text: "-100°C")
+    }()
+    lazy var forecastDescriptionLabel: UILabel! = {
+        createLabel(text: "Description:")
+    }()
+    lazy var forecastDescriptionValueLabel: UILabel! = {
+        createLabel(text: "Not so nice 🤷‍♂️")
+    }()
+    
     override func updateViewConstraints() {
         let margins = view.layoutMarginsGuide
         
@@ -165,15 +205,41 @@ class ViewController: UIViewController {
         searchButton.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 20).isActive = true
         searchButton.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: 5).isActive = true
         
-        temperatureLabel.topAnchor.constraint(equalTo: searchField.bottomAnchor, constant: 20).isActive = true
+        // assignment 4 UI
+        currentLabel.topAnchor.constraint(equalTo: searchField.bottomAnchor, constant: 20).isActive = true
+        currentLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        temperatureLabel.topAnchor.constraint(equalTo: currentLabel.bottomAnchor, constant: 20).isActive = true
         temperatureLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        temperatureValueLabel.topAnchor.constraint(equalTo: searchField.bottomAnchor, constant: 20).isActive = true
+        temperatureValueLabel.topAnchor.constraint(equalTo: currentLabel.bottomAnchor, constant: 20).isActive = true
         temperatureValueLabel.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 20).isActive = true
         
         descriptionLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 10).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         descriptionValueLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 10).isActive = true
         descriptionValueLabel.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 20).isActive = true
+        
+        // assignment 4 UI
+        forecastsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20).isActive = true
+        forecastsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        forecastHighLabel.topAnchor.constraint(equalTo: forecastsLabel.bottomAnchor, constant: 20).isActive = true
+        forecastHighLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        forecastHighValueLabel.topAnchor.constraint(equalTo: forecastsLabel.bottomAnchor, constant: 20).isActive = true
+        forecastHighValueLabel.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 20).isActive = true
+        
+        forecastLowLabel.topAnchor.constraint(equalTo: forecastHighValueLabel.bottomAnchor, constant: 10).isActive = true
+        forecastLowLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        forecastLowValueLabel.topAnchor.constraint(equalTo: forecastHighValueLabel.bottomAnchor, constant: 10).isActive = true
+        forecastLowValueLabel.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 20).isActive = true
+        
+        forecastDescriptionLabel.topAnchor.constraint(equalTo: forecastLowValueLabel.bottomAnchor, constant: 10).isActive = true
+        forecastDescriptionLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        forecastDescriptionValueLabel.topAnchor.constraint(equalTo: forecastLowValueLabel.bottomAnchor, constant: 10).isActive = true
+        forecastDescriptionValueLabel.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 20).isActive = true
         
         super.updateViewConstraints()
     }
