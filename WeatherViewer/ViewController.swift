@@ -13,13 +13,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // add view for data
+        view.addSubview(dataView)
+        
         view.addSubview(headerLabel)
         view.addSubview(searchButton)
         view.addSubview(searchField)
-        view.addSubview(temperatureLabel)
-        view.addSubview(temperatureValueLabel)
-        view.addSubview(descriptionValueLabel)
-        view.addSubview(descriptionLabel)
+        
+        // add views that hold weather data into data view
+        dataView.addSubview(temperatureLabel)
+        dataView.addSubview(temperatureValueLabel)
+        dataView.addSubview(descriptionValueLabel)
+        dataView.addSubview(descriptionLabel)
         
         toggleDisplay(isHidden: true)
         
@@ -57,6 +62,7 @@ class ViewController: UIViewController {
         view.setTitleColor(UIColor.black, for: .normal)
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.black.cgColor
+        view.contentEdgeInsets = UIEdgeInsets(top: 5.0, left: 15.0, bottom: 5.0, right: 15.0)
         view.addTarget(self, action: #selector(onSearchClicked), for: .touchDown)
         
         return view
@@ -111,10 +117,7 @@ class ViewController: UIViewController {
     }
     
     private func toggleDisplay(isHidden: Bool) {
-        temperatureLabel.isHidden = isHidden
-        temperatureValueLabel.isHidden = isHidden
-        descriptionValueLabel.isHidden = isHidden
-        descriptionLabel.isHidden = isHidden
+        dataView.isHidden = isHidden
     }
     
     func createLabel(text: String) -> UILabel {
@@ -124,6 +127,13 @@ class ViewController: UIViewController {
         view.font = view.font.withSize(20)
         return view
     }
+    
+    // create view to hold api data
+    lazy var dataView: UIView! = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     lazy var temperatureLabel: UILabel! = {
         return createLabel(text: "Temperature:")
@@ -143,6 +153,8 @@ class ViewController: UIViewController {
     
     override func updateViewConstraints() {
         let margins = view.layoutMarginsGuide
+        
+        dataView.widthAnchor.constraint(equalTo: margins.widthAnchor).isActive = true
         
         headerLabel.topAnchor.constraint(equalTo: margins.topAnchor, constant: 15).isActive = true
         headerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
