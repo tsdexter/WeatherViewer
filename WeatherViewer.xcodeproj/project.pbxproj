@@ -13,6 +13,7 @@
 		E4DF985C2265292C000A35F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4DF985A2265292C000A35F6 /* LaunchScreen.storyboard */; };
 		E4DF9864226630E7000A35F6 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DF9863226630E7000A35F6 /* ApiManager.swift */; };
 		E4DF98662266315A000A35F6 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DF98652266315A000A35F6 /* WeatherData.swift */; };
+		E4DF98842267E99D000A35F6 /* ForecastData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DF98832267E99D000A35F6 /* ForecastData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		E4DF9863226630E7000A35F6 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		E4DF98652266315A000A35F6 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		E4DF986722664087000A35F6 /* OAuthSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OAuthSwift.xcodeproj; path = "../../../../Downloads/OAuthSwift-swift3/OAuthSwift.xcodeproj"; sourceTree = "<group>"; };
+		E4DF98832267E99D000A35F6 /* ForecastData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				E4DF985D2265292C000A35F6 /* Info.plist */,
 				E4DF9863226630E7000A35F6 /* ApiManager.swift */,
 				E4DF98652266315A000A35F6 /* WeatherData.swift */,
+				E4DF98832267E99D000A35F6 /* ForecastData.swift */,
 			);
 			path = WeatherViewer;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				E4DF98542265292C000A35F6 /* ViewController.swift in Sources */,
 				E4DF9864226630E7000A35F6 /* ApiManager.swift in Sources */,
 				E4DF98662266315A000A35F6 /* WeatherData.swift in Sources */,
+				E4DF98842267E99D000A35F6 /* ForecastData.swift in Sources */,
 				E4DF98522265292C000A35F6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

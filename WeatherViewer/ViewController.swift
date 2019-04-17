@@ -94,6 +94,11 @@ class ViewController: UIViewController {
                     self.temperatureValueLabel.text = String(weatherData.currentTemperature) + "°C"
                     self.descriptionValueLabel.text = weatherData.description
                     
+                    // add tomorrows forecast
+                    self.forecastHighValueLabel.text = String(weatherData.forecasts[0].highTemperature) + "°C"
+                    self.forecastLowValueLabel.text = String(weatherData.forecasts[0].lowTemperature) + "°C"
+                    self.forecastDescriptionValueLabel.text = weatherData.forecasts[0].description
+                    
                     self.toggleDisplay(isHidden: false)
                 }
                 
@@ -223,22 +228,22 @@ class ViewController: UIViewController {
         forecastsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20).isActive = true
         forecastsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        forecastHighLabel.topAnchor.constraint(equalTo: forecastsLabel.bottomAnchor, constant: 20).isActive = true
+        forecastHighLabel.topAnchor.constraint(equalTo: forecastLowLabel.bottomAnchor, constant: 10).isActive = true
         forecastHighLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        forecastHighValueLabel.topAnchor.constraint(equalTo: forecastsLabel.bottomAnchor, constant: 20).isActive = true
+        forecastHighValueLabel.topAnchor.constraint(equalTo: forecastLowLabel.bottomAnchor, constant: 10).isActive = true
         forecastHighValueLabel.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 20).isActive = true
         
-        forecastLowLabel.topAnchor.constraint(equalTo: forecastHighValueLabel.bottomAnchor, constant: 10).isActive = true
+        forecastLowLabel.topAnchor.constraint(equalTo: forecastsLabel.bottomAnchor, constant: 20).isActive = true
         forecastLowLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        forecastLowValueLabel.topAnchor.constraint(equalTo: forecastHighValueLabel.bottomAnchor, constant: 10).isActive = true
+        forecastLowValueLabel.topAnchor.constraint(equalTo: forecastsLabel.bottomAnchor, constant: 20).isActive = true
         forecastLowValueLabel.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 20).isActive = true
         
-        forecastDescriptionLabel.topAnchor.constraint(equalTo: forecastLowValueLabel.bottomAnchor, constant: 10).isActive = true
+        forecastDescriptionLabel.topAnchor.constraint(equalTo: forecastHighValueLabel.bottomAnchor, constant: 10).isActive = true
         forecastDescriptionLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        forecastDescriptionValueLabel.topAnchor.constraint(equalTo: forecastLowValueLabel.bottomAnchor, constant: 10).isActive = true
+        forecastDescriptionValueLabel.topAnchor.constraint(equalTo: forecastHighValueLabel.bottomAnchor, constant: 10).isActive = true
         forecastDescriptionValueLabel.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 20).isActive = true
         
         super.updateViewConstraints()
