@@ -24,39 +24,53 @@ class ApiManager {
         self.oauth = OAuth1Swift(consumerKey: "dj0yJmk9SW11cGxVZHJJa1k4JnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PTBj", consumerSecret: "31f6402e94cfd083a499aa0c000e58133a81c2ab")
     }
 
-    func getWeatherData(location: String, success: @escaping (WeatherData?) -> Void) {
+    func getWeatherData(
+        location: String,
+        success: @escaping (WeatherData?) -> Void,
+        failure: @escaping () -> Void
+    ) {
         
         makeRequest(location: location, success: {(jsonData) -> Void in
             guard let json = jsonData as? [String: Any],
             let current = json["current_observation"] as? [String: Any],
                 let condition = current["condition"] as? [String: Any] else {
                     print("Error processing condition")
+                    failure()
                     return
             }
             
             guard let temperature = condition["temperature"] as? Int,
                 let description = condition["text"] as? String else {
                     print("Error getting today's data")
+                    failure()
                     return
             }
             
             guard let forecasts = json["forecasts"] as? [[String:Any]] else {
                 print("Error getting forecast")
+                failure()
                 return
             }
             
             guard let highTemperature = forecasts[0]["high"] as? Int,
                 let lowTemperature = forecasts[0]["low"] as? Int else {
                     print("Error getting todays's forecast")
+                    failure()
                     return
             }
             let weatherData = WeatherData(location: location, currentTemperature: temperature, description: description, highTemperature: highTemperature, lowTemperature: lowTemperature)
             
             success(weatherData)
+        }, failure: {() -> Void in
+            failure()
         })
     }
     
-    func makeRequest(location: String, success: @escaping (Any?) -> Void) {
+    func makeRequest(
+        location: String,
+        success: @escaping (Any?) -> Void,
+        failure: @escaping () -> Void
+    ) {
         
         let parameters = ["location": location, "format": "json", "u": "c"]
         
@@ -76,6 +90,7 @@ class ApiManager {
             },
             failure: {(data) -> Void in
                 print(data)
+                failure()
             }
         )
     }

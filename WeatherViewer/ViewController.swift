@@ -83,8 +83,31 @@ class ViewController: UIViewController {
                     self.toggleDisplay(isHidden: false)
                 }
                 
+            }, failure: {() -> Void in
+                DispatchQueue.main.async {
+                    self.showMessage(message: "Failed to get weather data, please try again.")
+                }
             })
         }
+    }
+    
+    private func showMessage(message: String) {
+        let rect = CGRect(x: self.view.frame.size.width / 2 - 150, y: self.view.frame.size.height / 2 - 100, width: 300, height: 45)
+        
+        let toastLabel = UILabel(frame: rect)
+        toastLabel.backgroundColor = UIColor.black
+        toastLabel.textColor = UIColor.white
+        toastLabel.textAlignment = .center
+        toastLabel.layer.cornerRadius = 1.0
+        toastLabel.alpha = 1
+        toastLabel.numberOfLines = 0
+        toastLabel.text = message
+        
+        self.view.addSubview(toastLabel)
+        
+        UIView.animate(withDuration: 4.0, animations: {
+            toastLabel.alpha = 0
+        })
     }
     
     private func toggleDisplay(isHidden: Bool) {
