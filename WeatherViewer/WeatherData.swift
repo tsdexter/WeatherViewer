@@ -15,6 +15,7 @@ class WeatherData {
     let description: String
     let highTemperature: Int
     let lowTemperature: Int
+    var forecasts: [ForecastData]
     
     init (
         location: String,
@@ -22,11 +23,21 @@ class WeatherData {
         description: String,
         highTemperature: Int,
         lowTemperature: Int
-        ) {
+    ) {
         self.location = location
         self.currentTemperature = currentTemperature
         self.description = description
         self.highTemperature = highTemperature
         self.lowTemperature = lowTemperature
+        self.forecasts = []
+    }
+    
+    func addForecast(
+        description: String,
+        highTemperature: Int,
+        lowTemperature: Int
+    ) {
+        let forecast = ForecastData(location: self.location, description: description, highTemperature: highTemperature, lowTemperature: lowTemperature)
+        self.forecasts.append(forecast)
     }
 }

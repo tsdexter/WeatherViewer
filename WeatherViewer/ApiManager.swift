@@ -60,6 +60,16 @@ class ApiManager {
             }
             let weatherData = WeatherData(location: location, currentTemperature: temperature, description: description, highTemperature: highTemperature, lowTemperature: lowTemperature)
             
+            // assignment 4
+            guard let tomorrowHighTemperature = forecasts[1]["high"] as? Int,
+                let tomorrowLowTemperature = forecasts[1]["low"] as? Int,
+                let tomorrowDescription = forecasts[1]["text"] as? String else {
+                    print("Error getting tomorrow's forecast")
+                    failure()
+                    return
+            }
+            weatherData.addForecast(description: tomorrowDescription, highTemperature: tomorrowHighTemperature, lowTemperature: tomorrowLowTemperature)
+            
             success(weatherData)
         }, failure: {() -> Void in
             failure()
